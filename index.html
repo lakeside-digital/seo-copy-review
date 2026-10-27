@@ -1,0 +1,28 @@
+<!doctype html>
+
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SEO Copy Review · Lakeside Digital</title><link rel="stylesheet" href="/style.css"></head>
+
+<body>
+
+<aside><div class="wordmark">SEO Copy Review</div><p class="edition">VISUAL SEO COPY REVIEW</p><div id="progress"></div><input id="search" type="search" placeholder="Search pages" aria-label="Search pages"><select id="filter" aria-label="Review filter"><option value="pending">Pending review</option><option value="all">All available pages</option><option value="complete">Decisions complete</option><option value="skipped">Skipped for later</option></select><select hidden id="issueFilter" aria-label="Issue filter"><option value="">All issue types</option></select><div id="filteredCount"></div><nav id="pages"></nav><div class="authority">Built by <a href="https://lakesidedigital.co.nz/" target="_blank" rel="noopener">Lakeside Digital</a>.<br>Your copy. Your branding. Your decisions.</div></aside>
+
+<main><header><span class="eyebrow">PREPARED COPY · VISUAL REVIEW</span><div class="toolbar"><button id="backup">Download backup</button><button id="restore">Restore backup</button><button id="export">Export reviewed CSV</button><input id="restoreFile" type="file" accept="application/json,.json" hidden></div></header>
+
+<section id="loading">Loading saved review…</section><section id="review" hidden>
+
+<div class="pageheading"><div><p id="pageLabel" class="eyebrow"></p><h1 id="pageTitle"></h1><a id="source" target="_blank" rel="noopener"></a></div><div id="saveStatus" role="status">Saved</div></div>
+
+<div id="metrics" class="metrics"></div><details class="evidence"><summary>Source and implementation notes</summary><div id="evidenceBody"></div></details>
+
+<label class="pagePickerLabel" for="pagePicker">Jump to any review page</label><select id="pagePicker" aria-label="Choose any review page"></select>
+
+<div class="comparisonSection"><h2>Page copy <span>Compare the original with your current draft</span></h2><div class="comparisonPair"><section><div class="visualLabel">BEFORE · ORIGINAL WEBSITE COPY</div><div id="siteBefore" class="siteViewport"></div></section><section><div class="visualLabel">AFTER · CURRENT DRAFT</div><div id="siteViewport" class="siteViewport"></div></section></div><p class="mobileNote">Shared client branding and imagery. Illustrative copy layout, not a live rendering of each page.</p><div id="pageFields" class="fieldGrid"></div></div>
+
+<div class="comparisonSection"><h2>Search result preview</h2><div class="comparisonPair"><section><div class="visualLabel">BEFORE · ORIGINAL SEARCH COPY</div><div id="searchBefore" class="searchPreview"></div></section><section><div class="visualLabel">AFTER · CURRENT DRAFT</div><div id="searchPreview" class="searchPreview"></div></section></div><p class="previewCaveat">Illustrative site and search previews. Width estimates use Arial 20 px / 14 px; Google may display a different snippet.</p><div id="searchFields" class="fieldGrid"></div></div>
+
+<div class="editorHeading"><span id="fieldProgress"></span></div><div id="fields"></div><label class="noteLabel" for="notes">Page notes</label><textarea id="notes" rows="2"></textarea>
+
+<footer><button id="previous">Previous</button><span id="position"></span><button id="next">Next</button><button id="saveNext" class="primary">Save choices and next</button><button id="approvePage">Approve all current copy</button><button id="acceptAll">Approve all current copy &amp; next</button><button id="keepAll">Keep all original copy &amp; next</button><button id="skip">Skip for now</button></footer>
+
+</section><div id="message" role="alert" hidden></div></main><script src="/app.js"></script></body></html>
+

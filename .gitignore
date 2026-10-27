@@ -1,0 +1,11 @@
+private/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+.env
+client-*
+*.xlsx
+*.zip
+seo-copy-reviewed.csv
+seo-copy-review-backup.json

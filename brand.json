@@ -1,0 +1,12 @@
+{
+  "name": "Harbour Gardens",
+  "headerBackground": "#173E35",
+  "headerText": "#FFFFFF",
+  "accent": "#34735E",
+  "font": "Georgia",
+  "logo": "demo-logo.svg",
+  "image": "demo-garden.svg",
+  "imageAlt": "Illustrated garden with layered hills, trees and planting beds",
+  "category": "GARDEN DESIGN",
+  "caption": "Shared illustration for the fictional Harbour Gardens sample. This previews copy, not each page's live layout."
+}
