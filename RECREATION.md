@@ -44,3 +44,13 @@ Resolve proposed/original/edited approvals to their corresponding exact values. 
 ## Acceptance checks
 
 Use disposable inputs and state. Check arbitrary page jumps save first, filters leave the all-page dropdown intact, all captured applicable fields are editable and absent fields are not invented. Check mixed decisions, edited bulk approval, explicit originals, Undo, optional completion, skip, persistence/restart, stale tabs, backup/restore and pending-safe exports. Inspect desktop and narrow layouts, image loading, heading growth and live text updates. Confirm lower-page actions preserve exact scroll and focus. Disclose untested limits.
+
+## Queue navigation, notices and inline audit cues
+
+Find the next eligible record using stable baseline order even after the current record disappears from Pending. Never wrap to the beginning at the end of a filtered queue; show an explicit saved/end notice. Pending excludes skipped records, which remain accessible in Skipped and the all-page selector. Guard overlapping navigation and bulk actions while saving.
+
+Keep page-level issue banners and repeat the relevant immutable source issues inside Before: H1 issues beside the original heading, title issues above the original search title, and description issues above its description. Leave After free of source-audit badges. Editing or approving does not erase original crawl evidence.
+
+Routine notices fade after 4.5 seconds and have an accessible dismiss button. Repeated notices reset the timer; valid edits and navigation clear transient notices. Save/load failures stay visible until dismissed or successfully resolved. Honor reduced-motion preferences. Width guidance remains warnings by default; if an adaptation enforces widths, its rejected-input notice follows this same transient lifecycle.
+
+Run `python -m unittest -v test_review.py` and, with Node installed, `node test_navigation.mjs`, `node test_notifications.mjs`, and `node test_preview_issues.mjs`. These portable tests use fictional records and require no client data or running server.

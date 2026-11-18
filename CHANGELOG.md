@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.1 — 18 November 2026
+
+- Fixed filtered queue advancement, skipped-page handling and overlapping navigation.
+- Added fading, dismissible routine notices while keeping save/load failures visible.
+- Repeated relevant audit badges inside original heading and search previews.
+- Updated recreation instructions and added portable browser-logic regression tests.
+
 ## 0.1.0 — 27 October 2026
 
 First portable public version of Lakeside Digital's visual SEO copy review workflow.

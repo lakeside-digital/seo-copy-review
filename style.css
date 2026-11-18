@@ -32,3 +32,13 @@ main{max-width:none}.pagePickerLabel{display:block;font-size:12px;margin:18px 0 
 button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible,input:focus-visible{outline:3px solid #34735e;outline-offset:3px}
 @media(max-width:700px){.comparisonPair:has(.siteViewport){grid-template-columns:1fr;max-width:366px}.siteViewport{max-width:366px}.brandHeader{height:82px;padding:18px 25px}.mobileReference{height:260px}.brandHero{padding:25px 23px 30px}.brandHero h2{font-size:30px}.brandCategory{font-size:10px}.visualLabel{font-size:10px}}
 
+
+/* Inline audit cues and transient, dismissible notices. */
+.previewIssues{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 10px}
+.previewIssues .issuePill{font-size:11px;line-height:1.4;padding:3px 7px;background:#fff1df;color:#943c00;border:1px solid #edc59f;border-radius:4px}
+#message{display:flex;align-items:flex-start;gap:16px;opacity:1;transition:opacity 250ms ease}
+#message[hidden]{display:none}
+#message.messageFading{opacity:0;pointer-events:none}
+#message>span{line-height:1.5}
+.dismissMessage{border:0;background:transparent;color:inherit;font-size:22px;line-height:1;padding:0 2px;flex:none}
+@media(prefers-reduced-motion:reduce){#message{transition:none}}
