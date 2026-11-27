@@ -42,16 +42,52 @@ function widthInfo(key,text){if(key!=='title'&&key!=='meta')return `${text.lengt
 
 function beforeIssueBadges(scope){const issues=current.issues.filter(issue=>scope==='h1'?(/\bh1\b/i.test(issue)||issue==='Page has identical headings'):scope==='title'?/^Title\b/i.test(issue):/^Description\b/i.test(issue));return issues.length?`<div class="previewIssues" data-issue-scope="${scope}" aria-label="Original ${scope==='meta'?'meta description':scope==='title'?'page title':'heading'} issues">${issues.map(issue=>`<span class="issuePill">${esc(issue)}</span>`).join('')}</div>`:'';}
 
+const catalogueSegments = new Set(['collection', 'collections', 'category', 'categories', 'product-category', 'product-categories']);
+
+function previewPath(url) {
+ return new URL(url).pathname.split('/').filter(Boolean).map(segment => {
+   try { return decodeURIComponent(segment); } catch { return segment; }
+ });
+}
+
+function isCataloguePage(page) {
+ const type = (page.type || '').trim().toLowerCase();
+ if (catalogueSegments.has(type) || type === 'product category' || type === 'product collection') return true;
+ if (type && type !== 'page') return false;
+ const segments = previewPath(page.url);
+ const first = segments[0]?.toLowerCase();
+ const section = /^[a-z]{2}-[a-z]{2}$/.test(first ?? '') ? segments[1] : first;
+ return catalogueSegments.has(section?.toLowerCase());
+}
+
+function storefrontBreadcrumbs(url) {
+ const segments = previewPath(url);
+ if (/^[a-z]{2}-[a-z]{2}$/i.test(segments[0] ?? '')) segments.shift();
+ if (catalogueSegments.has(segments[0]?.toLowerCase()) && segments.length > 1) segments.shift();
+ const labels = ['Home', ...segments.map(segment => segment.replace(/[-_]+/g, ' ').replace(/\b\w/g, letter => letter.toUpperCase()))];
+ return '<ol class="storefrontBreadcrumbs" aria-label="Breadcrumb">' +
+   labels.map((label, index) => '<li' + (index === labels.length - 1 ? ' aria-current="page"' : '') + '>' + esc(label) + '</li>').join('') + '</ol>';
+}
+
+function collectionWireframe() {
+ const card = '<div class="wireProduct"><div class="wireImage"></div><div class="wireLine"></div><div class="wireLine"></div></div>';
+ return '<div class="wireCatalogue" aria-hidden="true"><div class="wireToolbar"><span>☷ &nbsp; Filter</span><span>Sort by&nbsp; ▾</span></div>' +
+   '<div class="wireGrid">' + card.repeat(2) + '</div></div>';
+}
+
 function previewSingle(original,siteId,searchId){
  const text=k=>original?(current.fields[k]?.original??''):displayText(current,k),brand=baseline.brand;
  const logo=brand.logo?`<img src="/${esc(brand.logo)}" alt="${esc(brand.name)}">`:`<span class="brandText">${esc(brand.name)}</span>`;
  const photo=brand.image?`<img class="mobileReference" src="/${esc(brand.image)}" alt="${esc(brand.imageAlt||'Shared brand reference image')}">`:'';
  const h1=current.fields.h1?`<h2>${esc(text('h1'))}</h2>`:'<p class="missingPreview">No H1 field supplied for this page.</p>';
  const intro=current.fields.intro?`<p class="brandIntro">${esc(text('intro'))}</p>`:'';
- $(siteId).innerHTML=`<div class="brandPage"><div class="brandHeader">${logo}<span class="mockMenu" aria-hidden="true">☰</span></div>${photo}<div class="brandHero"><div class="brandCategory">${esc(brand.category||current.type)}</div>${original?beforeIssueBadges('h1'):''}${h1}${intro}</div></div>`;
+ const catalogue = isCataloguePage(current);
+ const context = catalogue ? storefrontBreadcrumbs(current.url) : '<div class="brandCategory">'+esc(brand.category||current.type)+'</div>';
+ const description = catalogue && !intro ? '<p class="collectionPlaceholder" aria-label="Collection description placeholder">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>' : '';
+ $(siteId).innerHTML=`<div class="brandPage${catalogue?' cataloguePreview':''}"><div class="brandHeader">${logo}<span class="mockMenu" aria-hidden="true">☰</span></div>${catalogue?'':photo}<div class="brandHero${catalogue?' collectionHero':''}">${context}${original?beforeIssueBadges('h1'):''}${h1}${intro}${description}</div>${catalogue?collectionWireframe():''}</div>`;
  $(searchId).innerHTML=`<div class="googleIdentity"><div><div class="googleSiteName">${esc(brand.name)}</div><div class="googleUrl">${esc(current.url)}</div></div></div>${original?beforeIssueBadges('title'):''}<div class="googleTitle">${esc(current.fields.title?text('title'):'(Page title not supplied)')}</div>${original?beforeIssueBadges('meta'):''}<div class="googleDescription">${esc(current.fields.meta?text('meta'):'(Meta description not supplied)')}</div>`;
 }
-function previews(){previewSingle(true,'siteBefore','searchBefore');previewSingle(false,'siteViewport','searchPreview');}
+function previews(){previewSingle(true,'siteBefore','searchBefore');previewSingle(false,'siteViewport','searchPreview');document.querySelector('.mobileNote').textContent=isCataloguePage(current)?'Illustrative collection layout. Breadcrumbs are inferred from the URL and the product grid is a wireframe.':baseline.brand.caption||'Shared brand imagery. Illustrative copy layout, not a live page rendering.';}
 function focusPreview(){}
 function loadContext(){}
 

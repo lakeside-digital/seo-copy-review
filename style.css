@@ -42,3 +42,23 @@ button:focus-visible,a:focus-visible,select:focus-visible,textarea:focus-visible
 #message>span{line-height:1.5}
 .dismissMessage{border:0;background:transparent;color:inherit;font-size:22px;line-height:1;padding:0 2px;flex:none}
 @media(prefers-reduced-motion:reduce){#message{transition:none}}
+
+/* Ecommerce collection and category previews. */
+.cataloguePreview { display: flex; flex-direction: column; background: #fff; color: #111; }
+.storefrontBreadcrumbs {
+  display: flex; flex-wrap: wrap; gap: 0 7px; padding: 0; margin: 0 0 26px;
+  list-style: none; font-size: 11px; line-height: 1.5; color: #656565;
+}
+.storefrontBreadcrumbs li + li::before { content: "/"; margin-right: 7px; color: #a0a0a0; }
+.cataloguePreview .collectionHero { flex: 0 0 auto; min-height: 0; padding: 17px 13px 19px; background: #fff; color: #111; }
+.cataloguePreview .collectionHero h2 { font-size: clamp(29px, 3.2vw, 39px); }
+.collectionPlaceholder { margin: 13px 0 0; font-size: 13px; line-height: 1.48; }
+.wireCatalogue { margin: 0 13px; padding-bottom: 18px; border-top: 1px solid #dedede; }
+.wireToolbar {
+  display: flex; justify-content: space-between; gap: 8px; padding: 11px 0;
+  font-size: 11px; color: #333;
+}
+.wireGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.wireImage { aspect-ratio: 4 / 5; border: 1px solid #e5e5e5; border-radius: 3px; background: #f3f3f3; }
+.wireLine { height: 7px; margin-top: 8px; width: 81%; border-radius: 2px; background: #e7e7e7; }
+.wireLine:last-child { width: 56%; }

@@ -10,19 +10,32 @@ Built by [Lakeside Digital](https://lakesidedigital.co.nz/). The recommendations
 
 1. Download this repository using **Code → Download ZIP** and extract it.
 2. Install [Python 3.10 or newer](https://www.python.org/downloads/) if needed. No additional Python packages, Node, API keys or accounts are required.
-3. Open a terminal in the extracted folder and run:
+3. Open a terminal in the extracted folder and choose one of the examples below.
+4. Open **http://127.0.0.1:8780** in your browser. Stop the server with Ctrl+C before switching examples. Run the same command again to resume that example.
 
-   ```sh
-   python server.py
-   ```
+On Windows, use `py` in place of `python` if needed. On macOS/Linux, you may need `python3`.
 
-   On Windows, use `py server.py` if `python` is unavailable. On macOS/Linux, you may need `python3 server.py`.
+### Service business · Harbour Gardens
 
-4. Open **http://127.0.0.1:8780** in your browser.
+Compare service page headings in a branded mobile preview with a shared illustration.
 
-The example is a fictional garden design business. Sample copy and original SVG illustrations are included; no client data is bundled. Stop the server with Ctrl+C. Run the same command to resume.
+```sh
+python server.py
+```
 
-![Fictional branded review example](review-example.jpg)
+![Before and after mobile previews for Harbour Gardens](review-example.jpg)
+
+### Ecommerce · Outbound Travel
+
+Compare collection and category copy in a storefront preview with URL-derived breadcrumbs, placeholder description text and a two-column product wireframe.
+
+```sh
+python server.py --input example-ecommerce.csv --brand brand-ecommerce.json --data-dir private/demo-ecommerce
+```
+
+![Before and after collection previews for Outbound Travel](review-example-ecommerce.jpg)
+
+Both examples use fictional businesses and sample copy. Each has its own review history.
 
 ## Use your own spreadsheet
 
@@ -45,6 +58,12 @@ Each page needs a unique `page_id`, a full `url`, and at least one original/prop
 | `original_secondary_h1` | `proposed_secondary_h1` | Additional captured H1 |
 
 Optional columns: `page_type`, `rationale`, `implementation_notes`. They appear as review context. Extra columns are ignored; retain your source workbook for other research, sheets, formulas and formatting.
+
+### Ecommerce previews
+
+Collection and category pages use a storefront preview with URL-derived breadcrumbs, a description area and a two-column product wireframe. The description area shows supplied introductory copy when available and lorem ipsum otherwise. The placeholder and product grid are visual aids and are excluded from exports.
+
+Use `Collection`, `Category`, `Product Collection` or `Product Category` in `page_type` for custom storefront paths. When the type is blank or `Page`, the tool recognises paths such as `/collections/bags`, `/categories/luggage` and `/product-category/travel/luggage`. A specific type such as `Blog` or `Product` keeps the standard preview.
 
 Omit field pairs that are outside scope. Blank/blank pairs on an individual row are absent, not invented editable components. Headings, titles and descriptions supplied for review need decisions. Other unchanged fields are optional until edited or explicitly decided; changed proposals need decisions. An introductory subheading that does not exist on the page requires a separate template decision and is not supported as a copy-only addition.
 
